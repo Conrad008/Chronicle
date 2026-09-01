@@ -29,3 +29,14 @@ def photo_list(request):
 def photo_detail(request, pk):
     photo = get_object_or_404(Photo, pk=pk)
     return render(request, 'photo_gallery/photo_detail.html', {'photo': photo})
+
+@login_required
+def toggle_like(request, pk):
+    photo = get_object_or_404(Photo, pk=pk)
+    user = request.user
+    if user in photo.likes.all():
+        photo.likes.remove(user)
+    else:
+        photo.likes.add(user)
+        photo.dislikes.remove(user)
+    return redirect('photo_detail', pk=pk)
