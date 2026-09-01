@@ -40,3 +40,14 @@ def toggle_like(request, pk):
         photo.likes.add(user)
         photo.dislikes.remove(user)
     return redirect('photo_detail', pk=pk)
+
+@login_required
+def toggle_dislike(request, pk):
+    photo = get_object_or_404(Photo, pk=pk)
+    user = request.user
+    if user in photo.dislikes.all():
+        photo.dislikes.remove(user)
+    else:
+        photo.dislikes.add(user)
+        photo.likes.remove(user)
+    return redirect('photo_detail', pk=pk)
