@@ -25,3 +25,7 @@ def photo_list(request):
         photos = photos.filter(tags__name=tag_slug)
     tags = Tag.objects.all()
     return render(request, 'photo_gallery/photo_list.html', {'photos': photos, 'tags': tags, 'selected_tag': tag_slug})
+
+def photo_detail(request, pk):
+    photo = get_object_or_404(Photo, pk=pk)
+    return render(request, 'photo_gallery/photo_detail.html', {'photo': photo})
