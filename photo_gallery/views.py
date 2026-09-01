@@ -51,3 +51,7 @@ def toggle_dislike(request, pk):
         photo.dislikes.add(user)
         photo.likes.remove(user)
     return redirect('photo_detail', pk=pk)
+
+@login_required
+def profile_view(request):
+    return render(request, 'photo_gallery/profile.html', {'user': request.user})
