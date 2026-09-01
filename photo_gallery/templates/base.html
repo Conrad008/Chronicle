@@ -20,7 +20,24 @@
         }
     </script>
 </head>
-<body>
+<body class="bg-warmCream text-darkBrown font-sans antialiased min-h-screen flex flex-col">
+    <nav class="border-b border-terracotta/20 bg-warmCream px-6 py-4 flex justify-between items-center sticky top-0 z-50">
+        <a href="{% url 'photo_list' %}" class="text-2xl font-serif font-bold text-terracotta">Chronicle</a>
+
+        <div class="space-x-4 flex items-center">
+            {% if user.is_authenticated %}
+                <a href="{% url 'profile' %}" class="hover:text-sageGreen transition">Profile</a>
+                <form action="{% url 'logout' %}" method="post" class="inline">
+                    {% csrf_token %}
+                    <button type="submit" class="bg-terracotta text-warmCream px-4 py-2 rounded-md hover:bg-terracotta/90 transition">Logout</button>
+                </form>
+            {% else %}
+                <a href="{% url 'login' %}" class="hover:text-sageGreen transition">Log In</a>
+                <a href="{% url 'register' %}" class="bg-sageGreen text-warmCream px-4 py-2 rounded-md hover:bg-sageGreen/90 transition">Register</a>
+            {% endif %}
+        </div>
+        
+    </nav>
     
 </body>
 </html>
