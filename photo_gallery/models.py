@@ -14,3 +14,22 @@ class Profile(models.Model):
 
     def __str__(self):
         return f"{self.user.username}'s Profile"
+
+class Photo(models.Model):
+    title = models.CharField(max_length=200)
+    description = models.TextField()
+    image = models.ImageField(upload_to='photos/')
+    created_at = models.DateTimeField(auto_now_add=True)
+    author = models.ForeignKey(User, on_delete=models.CASCADE, related_name='photos')
+    tags = models.ManyToManyField(Tag, related_name='photos', blank=True)
+    likes = models.ManyToManyField(User, related_name='liked_photos', blank=True)
+    dislikes = models.ManyToManyField(User, related_name='disliked_photos', blank=True)
+
+    def total_likes(self):
+        return self.likes.count()
+
+    def total_dislikes(self):
+        return self.dislikes.count()
+
+    def __str__(self):
+        return self.title
