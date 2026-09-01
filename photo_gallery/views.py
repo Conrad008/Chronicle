@@ -17,3 +17,11 @@ def register_view(request):
     else:
         form = UserCreationForm()
     return render(request, 'registration/register.html', {'form': form})
+
+def photo_list(request):
+    tag_slug = request.GET.get('tag')
+    photos = Photo.objects.all().order_by('-created_at')
+    if tag_slug:
+        photos = photos.filter(tags__name=tag_slug)
+    tags = Tag.objects.all()
+    return render(request, 'photo_gallery/photo_list.html', {'photos': photos, 'tags': tags, 'selected_tag': tag_slug})
