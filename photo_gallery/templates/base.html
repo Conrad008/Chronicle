@@ -36,8 +36,11 @@
                 <a href="{% url 'register' %}" class="bg-sageGreen text-warmCream px-4 py-2 rounded-md hover:bg-sageGreen/90 transition">Register</a>
             {% endif %}
         </div>
-        
+
     </nav>
-    
+
+    <main class="flex-grow container mx-auto px-4 py-8">
+        {% block content %}{% endblock %}
+    </main>
 </body>
 </html>
