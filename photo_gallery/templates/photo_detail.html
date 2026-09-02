@@ -26,5 +26,17 @@
                 <p class="text-sm text-sageGreen italic">Log in to interact with this photo.</p>
             {% endif %}
         </div>
+
+        <p class="text-darkBrown/80 leading-relaxed mb-6">{{ photo.description }}</p>
+
+        <div class="flex flex-wrap gap-2 pt-4 border-t border-darkBrown/10">
+            {% for tag in photo.tags.all %}
+                <a href="{% url 'photo_list' %}?tag={{ tag.name }}" class="text-sm px-3 py-1 bg-warmCream text-sageGreen border border-sageGreen/30 rounded-full hover:bg-sageGreen hover:text-warmCream transition">
+                    #{{ tag.name }}
+                </a>
+            {% endfor %}
+        </div>
     </div>
 </div>
+
+{% endblock %}
