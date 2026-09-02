@@ -19,3 +19,20 @@
         </div>
     </div>
 </div>
+
+<h2 class="text-2xl font-serif font-bold text-darkBrown mb-4">Your Liked Photos</h2>
+<div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+    {% for photo in user.liked_photos.all %}
+        <div class="bg-white rounded-lg overflow-hidden border border-darkBrown/10 shadow-sm">
+            <a href="{% url 'photo_detail' photo.pk %}">
+                <img src="{{ photo.image.url }}" alt="{{ photo.title }}" class="w-full h-40 object-cover">
+            </a>
+            <div class="p-3">
+                <h3 class="font-bold truncate text-darkBrown">{{ photo.title }}</h3>
+            </div>
+        </div>
+    {% empty %}
+        <p class="text-darkBrown/60 col-span-full">You haven't liked any photos yet.</p>
+    {% endfor %}
+</div>
+{% endblock %}
