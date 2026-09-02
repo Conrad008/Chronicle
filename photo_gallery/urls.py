@@ -9,6 +9,6 @@ urlpatterns = [
     path('photo/<int:pk>/dislike/', views.toggle_dislike, name='toggle_dislike'),
     path('profile/', views.profile_view, name='profile'),
     path('register/', views.register_view, name='register'),
-    path('login/', auth_views.LoginView.as_view(template_name='registration/login.html'), name='login'),
+    path('login/', auth_views.LoginView.as_view(template_name='login.html'), name='login'),
     path('logout/', auth_views.LogoutView.as_view(), name='logout'),
 ] 
