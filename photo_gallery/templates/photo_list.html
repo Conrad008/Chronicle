@@ -1,3 +1,17 @@
 {% extends base.html %}
 {% block content %}
 
+<div class="mb-8">
+    <h1 class="text-3xl font-serif font-bold text-darkBrown mb-4">Explore Collection</h1>
+    
+    <div class="flex flex-wrap gap-2">
+        <a href="{% url 'photo_list' %}" class="px-3 py-1 text-sm rounded-full border border-darkBrown/20 {% if not selected_tag %}bg-terracotta text-warmCream{% else %}bg-transparent text-darkBrown hover:border-terracotta{% endif %}">
+            All
+        </a>
+        {% for tag in tags %}
+            <a href="?tag={{ tag.name }}" class="px-3 py-1 text-sm rounded-full border border-darkBrown/20 {% if selected_tag == tag.name %}bg-terracotta text-warmCream{% else %}bg-transparent text-darkBrown hover:border-terracotta{% endif %}">
+                #{{ tag.name }}
+            </a>
+        {% endfor %}
+    </div>
+</div>
