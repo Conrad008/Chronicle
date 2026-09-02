@@ -16,7 +16,7 @@ def register_view(request):
             return redirect('photo_list')
     else:
         form = UserCreationForm()
-    return render(request, 'registration/register.html', {'form': form})
+    return render(request, 'register.html', {'form': form})
 
 def photo_list(request):
     tag_slug = request.GET.get('tag')
@@ -24,11 +24,11 @@ def photo_list(request):
     if tag_slug:
         photos = photos.filter(tags__name=tag_slug)
     tags = Tag.objects.all()
-    return render(request, 'photo_gallery/photo_list.html', {'photos': photos, 'tags': tags, 'selected_tag': tag_slug})
+    return render(request, 'photo_list.html', {'photos': photos, 'tags': tags, 'selected_tag': tag_slug})
 
 def photo_detail(request, pk):
     photo = get_object_or_404(Photo, pk=pk)
-    return render(request, 'photo_gallery/photo_detail.html', {'photo': photo})
+    return render(request, 'photo_detail.html', {'photo': photo})
 
 @login_required
 def toggle_like(request, pk):
@@ -54,4 +54,4 @@ def toggle_dislike(request, pk):
 
 @login_required
 def profile_view(request):
-    return render(request, 'photo_gallery/profile.html', {'user': request.user})
+    return render(request, 'profile.html', {'user': request.user})
