@@ -10,6 +10,21 @@
                 <h1 class="text-3xl font-serif font-bold text-darkBrown mb-2">{{ photo.title }}</h1>
                 <p class="text-sm text-darkBrown/60">By <span class="font-semibold text-darkBrown">{{ photo.author.username }}</span> • {{ photo.created_at|date:"M d, Y" }}</p>
             </div>
+
+            {% if user.is_authenticated %}
+                <div class="flex items-center space-x-3">
+                    <a href="{% url 'toggle_like' photo.pk %}" class="flex items-center space-x-1 border px-4 py-2 rounded-lg transition {% if user in photo.likes.all %}bg-terracotta text-warmCream border-terracotta{% else %}border-darkBrown/20 text-darkBrown hover:border-terracotta{% endif %}">
+                        <i class="fa-solid fa-thumbs-up"></i>
+                        <span class="font-bold">{{ photo.total_likes }}</span>
+                    </a>
+                    <a href="{% url 'toggle_dislike' photo.pk %}" class="flex items-center space-x-1 border px-4 py-2 rounded-lg transition {% if user in photo.dislikes.all %}bg-darkBrown text-warmCream border-darkBrown{% else %}border-darkBrown/20 text-darkBrown hover:border-darkBrown{% endif %}">
+                        <i class="fa-solid fa-thumbs-down"></i>
+                        <span class="font-bold">{{ photo.total_dislikes }}</span>
+                    </a>
+                </div>
+            {% else %}
+                <p class="text-sm text-sageGreen italic">Log in to interact with this photo.</p>
+            {% endif %}
         </div>
     </div>
 </div>
