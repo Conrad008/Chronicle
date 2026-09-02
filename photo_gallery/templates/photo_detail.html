@@ -3,4 +3,13 @@
 
 <div class="max-w-4xl mx-auto bg-white border border-darkBrown/10 rounded-xl overflow-hidden shadow-sm">
     <img src="{{ photo.image.url }}" alt="{{ photo.title }}" class="w-full max-h-[500px] object-cover">
+
+    <div class="p-6 md:p-8">
+        <div class="flex flex-wrap justify-between items-start gap-4 mb-4">
+            <div>
+                <h1 class="text-3xl font-serif font-bold text-darkBrown mb-2">{{ photo.title }}</h1>
+                <p class="text-sm text-darkBrown/60">By <span class="font-semibold text-darkBrown">{{ photo.author.username }}</span> • {{ photo.created_at|date:"M d, Y" }}</p>
+            </div>
+        </div>
+    </div>
 </div>
